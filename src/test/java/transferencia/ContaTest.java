@@ -13,31 +13,54 @@ class ContaTest {
 
     @BeforeEach
     void setUp() {
-        xuxa = new Cliente("Xuxa","12345678900", "111111");
+        xuxa = new Cliente("Xuxa", "12345678900", "111111");
         silvioSantos = new Cliente("Silvio Santos", "00987654321", "22222");
 
         contaXuxa = new Conta("0025", "2254", 2500.00, xuxa);
-        contaSilvio = new Conta("0026", "2251", 3550.00, silvioSantos);
-
+        contaSilvio = new Conta("0026", "2251", 3500.00, silvioSantos);
     }
 
     @Test
-    public void realizarTransacao(){
+    public void realizarTransacao() {
         contaXuxa.realizarTransferencia(1000.00, contaSilvio);
         assertEquals(1500.00, contaXuxa.getSaldo());
-        assertEquals(4500.00,00, contaSilvio.getSaldo());
+        assertEquals(4500.00, contaSilvio.getSaldo());
     }
 
     @Test
-    public void realizarTransferenciaInvalida(){
-        boolean resultado = contaXuxa.realizarTransferencia(3500.00,contaSilvio);
+    public void realizarTransferenciaInvalida() {
+        boolean resultado = contaXuxa.realizarTransferencia(3500.00, contaSilvio);
         assertFalse(resultado);
-
     }
 
     @Test
-    public void validarAgencia(){
-        assertEquals("0025",contaXuxa.getAgencia());
+    public void validarProprietario() {
+        assertEquals(xuxa, contaXuxa.getProprietario());
     }
 
+    @Test
+    public void validarAgencia() {
+        assertEquals("0025", contaXuxa.getAgencia());
+    }
+
+    @Test
+    public void validarnumeroConta() {
+        assertEquals("2254", contaXuxa.getNumeroConta());
+    }
+
+    @Test
+    public void validarNome() {
+        assertEquals("Silvio Santos", silvioSantos.getNome());
+    }
+
+    @Test
+    public void validarCpf() {
+        assertEquals("00987654321", silvioSantos.getCpf());
+    }
+
+    @Test
+    public void validarRg() {
+        assertEquals("22222", silvioSantos.getRg());
+    }
 }
+
